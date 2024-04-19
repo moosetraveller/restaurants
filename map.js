@@ -18,7 +18,7 @@ basemap.addTo(map);
 
 let poiLayer = null;
 let mapFilterElement = null;
-let markers = null;
+let clusters = null;
 
 initializeMap();
 
@@ -77,17 +77,18 @@ async function initializeMap() {
     map.fitBounds(bounds);
     map.zoomIn(1);
 
-    markers = L.DonutCluster({ chunkedLoading: true }, {
+    clusters = L.DonutCluster({ chunkedLoading: true }, {
         key: 'betriebsart',
         arcColorDict: getArcColorDict(data),
-        attribution: `
-            <a href="https://data.stadt-zuerich.ch/dataset/geo_gastwirtschaftsbetriebe" target="_blank">Stadt Zürich</a>
-        `,
     });
-    markers.addLayers(poiLayer.getLayers());
+    clusters.addLayers(poiLayer.getLayers());
 
     // poiLayer.addTo(map);
-    markers.addTo(map);
+    clusters.addTo(map);
+
+    map.attributionControl.addAttribution(`
+        <a href="https://data.stadt-zuerich.ch/dataset/geo_gastwirtschaftsbetriebe" target="_blank">Stadt Zürich</a>
+    `);
 
 }
 
