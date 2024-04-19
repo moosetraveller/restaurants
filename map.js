@@ -5,8 +5,8 @@ map.attributionControl.setPrefix('');
 
 const basemap =  L.tileLayer('https://wmts.geo.admin.ch/1.0.0/ch.swisstopo.swissimage/default/current/3857/{z}/{x}/{y}.jpeg', {
 	attribution: '&copy; <a href="https://www.swisstopo.admin.ch/">swisstopo</a>',
-	minZoom: 2,
-	maxZoom: 15,
+	minZoom: 10,
+	maxZoom: 19,
 	bounds: [[45.398181, 5.140242], [48.230651, 11.47757]]
 });
 basemap.addTo(map);
