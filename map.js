@@ -3,11 +3,11 @@ const map = L.map('map')
 
 map.attributionControl.setPrefix('');
 
-const basemap =  L.tileLayer('https://wmts.geo.admin.ch/1.0.0/ch.swisstopo.swissimage/default/current/3857/{z}/{x}/{y}.jpeg', {
-	attribution: '&copy; <a href="https://www.swisstopo.admin.ch/">swisstopo</a>',
-	minZoom: 10,
-	maxZoom: 19,
-	bounds: [[45.398181, 5.140242], [48.230651, 11.47757]]
+const basemap = L.tileLayer('https://wmts.geo.admin.ch/1.0.0/ch.swisstopo.swissimage/default/current/3857/{z}/{x}/{y}.jpeg', {
+    attribution: '&copy; <a href="https://www.swisstopo.admin.ch/">swisstopo</a>',
+    minZoom: 10,
+    maxZoom: 19,
+    bounds: [[45.398181, 5.140242], [48.230651, 11.47757]]
 });
 basemap.addTo(map);
 
@@ -29,9 +29,9 @@ async function initializeMap() {
 
     poiLayer = L.geoJSON(data, {
         onEachFeature: (feature, layer) => {
-            
+
             const properties = feature.properties;
-            
+
             const categoryColor = getColor(properties['betriebsart']);
 
             layer.bindPopup(`
@@ -51,7 +51,7 @@ async function initializeMap() {
             }
             return true;
         },
-        pointToLayer: (feature, point) => { 
+        pointToLayer: (feature, point) => {
             const categoryColor = getColor(feature.properties['betriebsart']);
             return L.marker(point, {
                 icon: L.divIcon({
@@ -61,7 +61,7 @@ async function initializeMap() {
                     popupAnchor: [0, -36],
                     html: `<span class="leaflet-marker" style="--marker-color: ${categoryColor};" />`
                 })
-            }); 
+            });
         },
         attribution: `
             <a href="https://data.stadt-zuerich.ch/dataset/geo_gastwirtschaftsbetriebe" target="_blank">Stadt Zürich</a>
@@ -76,12 +76,20 @@ async function initializeMap() {
         arcColorDict: getArcColorDict(data),
     });
     markers.addLayers(poiLayer.getLayers());
-    
+
     // poiLayer.addTo(map);
     markers.addTo(map);
 
 }
 
+/**
+ * Creates a dictionary that maps each category found in the
+ * input data to a color. The color for each category is
+ * determined by calling `getColor(category)`.
+ * 
+ * @param {object} data 
+ * @returns a dictionary that defines a color for each category
+ */
 function getArcColorDict(data) {
     const dict = {};
     for (const feature of data.features) {
@@ -97,7 +105,7 @@ function getArcColorDict(data) {
  */
 async function createFilterDropdown(data) {
 
-    const filterDropdownControl = L.control({position: 'topright'});
+    const filterDropdownControl = L.control({ position: 'topright' });
 
     filterDropdownControl.onAdd = () => {
 
