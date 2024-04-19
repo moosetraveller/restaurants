@@ -83,12 +83,12 @@ async function initializeMap() {
 }
 
 /**
- * Creates a dictionary that maps each category found in the
- * input data to a color. The color for each category is
- * determined by calling `getColor(category)`.
+ * Creates a dictionary that maps each category to a color. 
+ * The color for each category is determined by calling 
+ * `getColor(category)`.
  * 
  * @param {object} data 
- * @returns a dictionary that defines a color for each category
+ * @returns a dictionary that maps a color for each category
  */
 function getArcColorDict(data) {
     const dict = {};
