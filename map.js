@@ -71,12 +71,24 @@ async function initializeMap() {
     const bounds = poiLayer.getBounds();
     map.fitBounds(bounds);
 
-    markers = L.markerClusterGroup();
+    markers = L.DonutCluster({ chunkedLoading: true }, {
+        key: 'betriebsart',
+        arcColorDict: getArcColorDict(data),
+    });
     markers.addLayers(poiLayer.getLayers());
     
     // poiLayer.addTo(map);
     markers.addTo(map);
 
+}
+
+function getArcColorDict(data) {
+    const dict = {};
+    for (const feature of data.features) {
+        const category = feature.properties['betriebsart'];
+        dict[category] = getColor(category);
+    }
+    return dict;
 }
 
 /**
