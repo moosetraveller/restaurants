@@ -32,7 +32,7 @@ async function initializeMap() {
 
             const properties = feature.properties;
 
-            const categoryColor = getColor(properties['betriebsart']);
+            const categoryColor = getCategoryColor(properties['betriebsart']);
 
             layer.bindPopup(`
                 <p class="leaflet-popup-category" style="--marker-color: ${categoryColor};">
@@ -52,7 +52,7 @@ async function initializeMap() {
             return true;
         },
         pointToLayer: (feature, point) => {
-            const categoryColor = getColor(feature.properties['betriebsart']);
+            const categoryColor = getCategoryColor(feature.properties['betriebsart']);
             return L.marker(point, {
                 icon: L.divIcon({
                     className: "leaflet-marker-container",
@@ -85,7 +85,7 @@ async function initializeMap() {
 /**
  * Creates a dictionary that maps each category to a color. 
  * The color for each category is determined by calling 
- * `getColor(category)`.
+ * `getCategoryColor(category)`.
  * 
  * @param {object} data 
  * @returns a dictionary that maps a color for each category
@@ -94,7 +94,7 @@ function getArcColorDict(data) {
     const dict = {};
     for (const feature of data.features) {
         const category = feature.properties['betriebsart'];
-        dict[category] = getColor(category);
+        dict[category] = getCategoryColor(category);
     }
     return dict;
 }
@@ -159,7 +159,7 @@ async function createFilterDropdown(data) {
  * @returns a hex code, e.g., #424874
  * @see https://stackoverflow.com/a/16348977/42659
  */
-function getColor(category) {
+function getCategoryColor(category) {
     var hash = 0;
     for (var i = 0; i < category.length; i++) {
         hash = category.charCodeAt(i) + ((hash << 2) - hash);

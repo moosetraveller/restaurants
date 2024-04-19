@@ -4,7 +4,7 @@ A simple webmap with Leaflet showing restaurants and other food establishments i
 
 ## Categories
 
-The webmap shows restaurants and other food establishments. Each category (`betriebsart`) has its own color which is calculated by `getCategoryColor()`.
+The webmap shows restaurants and other food establishments. Each category (`betriebsart`) has its own color which is determined by `getCategoryColor(category)`.
 
 The restaurants and other food establishments can be filtered using the provided dropdown on the top right of the map.
 
