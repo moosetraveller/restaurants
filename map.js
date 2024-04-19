@@ -3,14 +3,16 @@ const map = L.map('map')
 
 map.attributionControl.setPrefix('');
 
-const basemap = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
-	attribution: 'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ, TomTom, Intermap, iPC, USGS, FAO, NPS, NRCAN, GeoBase, Kadaster NL, Ordnance Survey, Esri Japan, METI, Esri China (Hong Kong), and the GIS User Community'
+const basemap = L.tileLayer('https://wmts.geo.admin.ch/1.0.0/ch.swisstopo.swissimage/default/current/3857/{z}/{x}/{y}.jpeg', {
+    attribution: '&copy; <a href="https://www.swisstopo.admin.ch/">swisstopo</a>',
+    minZoom: 10,
+    maxZoom: 19,
+    opacity: 0.9,
+    bounds: [[45.398181, 5.140242], [48.230651, 11.47757]]
 });
-// const basemap = L.tileLayer('https://wmts.geo.admin.ch/1.0.0/ch.swisstopo.swissimage/default/current/3857/{z}/{x}/{y}.jpeg', {
-//     attribution: '&copy; <a href="https://www.swisstopo.admin.ch/">swisstopo</a>',
-//     minZoom: 10,
-//     maxZoom: 19,
-//     bounds: [[45.398181, 5.140242], [48.230651, 11.47757]]
+// const basemap = L.tileLayer.wms('https://wms.zh.ch/upwms?Service?', {
+//     layers: 'upwms',
+//     attribution: 'WMS Raster-Übersichtsplan: © <a href="https://opendata.swiss/en/dataset/wms-raster-ubersichtsplan-upwms">Geoinformation Kanton Zürich</a>',
 // });
 basemap.addTo(map);
 

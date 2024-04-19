@@ -3,10 +3,14 @@
         "betriebsart",
         "betriebsname",
         "gastwirtschaftsbetriebe",
+        "Geoinformation",
+        "Kanton",
         "markercluster",
         "Stadt",
         "strasselang",
         "swisstopo",
-        "topright"
+        "topright",
+        "Übersichtsplan",
+        "upwms"
     ]
 }
