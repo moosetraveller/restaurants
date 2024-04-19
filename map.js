@@ -137,7 +137,7 @@ async function createFilterDropdown(data) {
             })
             .map(category => new Option(category, category));
 
-        options.unshift(new Option('-- no filter selected --', ''));
+        options.unshift(new Option('-- kein Filter gewählt --', ''));
 
         for (let option of options) {
             mapFilterElement.add(option);
