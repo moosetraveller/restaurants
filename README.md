@@ -14,6 +14,10 @@ The restaurants and other food establishments can be filtered using the provided
 
 The popup contains the name (`betriebsname`) and the address.
 
+## Dependencies
+
+The webmap is using [Leaflet](https://leafletjs.com), [`Leaflet.DonutCluster`](https://github.com/kalisio/Leaflet.DonutCluster) and [`Leaflet.markercluster`](https://github.com/Leaflet/Leaflet.markercluster).
+
 ## Data
 | | |
 |----|---|
