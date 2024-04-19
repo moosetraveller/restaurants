@@ -2,6 +2,8 @@
 
 A simple webmap with Leaflet showing restaurants and other food establishments in Zurich City.
 
+[Demo](https://moosetraveller.github.io/restaurants)
+
 ## Categories
 
 The webmap shows restaurants and other food establishments. Each category (`betriebsart`) has its own color which is determined by `getCategoryColor(category)`.
