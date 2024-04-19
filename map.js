@@ -80,6 +80,9 @@ async function initializeMap() {
     markers = L.DonutCluster({ chunkedLoading: true }, {
         key: 'betriebsart',
         arcColorDict: getArcColorDict(data),
+        attribution: `
+            <a href="https://data.stadt-zuerich.ch/dataset/geo_gastwirtschaftsbetriebe" target="_blank">Stadt Zürich</a>
+        `,
     });
     markers.addLayers(poiLayer.getLayers());
 
