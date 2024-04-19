@@ -146,8 +146,8 @@ async function createFilterDropdown(data) {
         mapFilterElement.addEventListener('change', () => {
             poiLayer.clearLayers();
             poiLayer.addData(data);
-            markers.clearLayers();
-            markers.addLayers(poiLayer.getLayers());
+            clusters.clearLayers();
+            clusters.addLayers(poiLayer.getLayers());
         });
 
         L.DomEvent.disableClickPropagation(div);
