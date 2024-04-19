@@ -2,7 +2,7 @@
 
 A simple webmap with Leaflet showing restaurants and other food establishments in Zurich City.
 
-[Demo](https://moosetraveller.github.io/restaurants)
+- [Demo](https://moosetraveller.github.io/restaurants)
 
 ## Categories
 
