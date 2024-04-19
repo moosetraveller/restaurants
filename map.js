@@ -6,13 +6,14 @@ map.attributionControl.setPrefix('');
 const basemap =  L.tileLayer('https://wmts.geo.admin.ch/1.0.0/ch.swisstopo.swissimage/default/current/3857/{z}/{x}/{y}.jpeg', {
 	attribution: '&copy; <a href="https://www.swisstopo.admin.ch/">swisstopo</a>',
 	minZoom: 2,
-	maxZoom: 19,
+	maxZoom: 15,
 	bounds: [[45.398181, 5.140242], [48.230651, 11.47757]]
 });
 basemap.addTo(map);
 
 let poiLayer = null;
 let mapFilterElement = null;
+let markers = null;
 
 initializeMap();
 
@@ -21,7 +22,7 @@ initializeMap();
  */
 async function initializeMap() {
 
-    const response = await fetch('../data/stp.gastwirtschaftsbetriebe.json');
+    const response = await fetch('data/stp.gastwirtschaftsbetriebe.json');
     const data = await response.json();
 
     createFilterDropdown(data);
@@ -69,8 +70,12 @@ async function initializeMap() {
 
     const bounds = poiLayer.getBounds();
     map.fitBounds(bounds);
+
+    markers = L.markerClusterGroup();
+    markers.addLayers(poiLayer.getLayers());
     
-    poiLayer.addTo(map);
+    // poiLayer.addTo(map);
+    markers.addTo(map);
 
 }
 
@@ -111,6 +116,8 @@ async function createFilterDropdown(data) {
         mapFilterElement.addEventListener('change', () => {
             poiLayer.clearLayers();
             poiLayer.addData(data);
+            markers.clearLayers();
+            markers.addLayers(poiLayer.getLayers());
         });
 
         L.DomEvent.disableClickPropagation(div);
