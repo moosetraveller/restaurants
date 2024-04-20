@@ -1,4 +1,6 @@
-const map = L.map('map')
+const map = L.map('map', {
+    zoomSnap: 0.5,  //  factual zoom levels
+})
     .setView([46.801111, 8.226667], 13);
 
 map.attributionControl.setPrefix('');
@@ -10,27 +12,19 @@ const basemap = L.tileLayer('https://wmts.geo.admin.ch/1.0.0/ch.swisstopo.swissi
     opacity: 0.9,
     bounds: [[45.398181, 5.140242], [48.230651, 11.47757]]
 });
-// const basemap = L.tileLayer.wms('https://wms.zh.ch/upwms?Service?', {
-//     layers: 'upwms',
-//     attribution: 'WMS Raster-Übersichtsplan: © <a href="https://opendata.swiss/en/dataset/wms-raster-ubersichtsplan-upwms">Geoinformation Kanton Zürich</a>',
-// });
 basemap.addTo(map);
 
 let poiLayer = null;
+let districtLayer = null;
 let mapFilterElement = null;
 let clusters = null;
 
 initializeMap();
 
-/**
- * Initialize the webmap.
- */
-async function initializeMap() {
+async function initializeRestaurantLayer() {
 
     const response = await fetch('data/stp.gastwirtschaftsbetriebe.json');
     const data = await response.json();
-
-    createFilterDropdown(data);
 
     poiLayer = L.geoJSON(data, {
         onEachFeature: (feature, layer) => {
@@ -68,14 +62,7 @@ async function initializeMap() {
                 })
             });
         },
-        attribution: `
-            <a href="https://data.stadt-zuerich.ch/dataset/geo_gastwirtschaftsbetriebe" target="_blank">Stadt Zürich</a>
-        `
     });
-
-    const bounds = poiLayer.getBounds();
-    map.fitBounds(bounds);
-    map.zoomIn(1);
 
     clusters = L.DonutCluster({ chunkedLoading: true }, {
         key: 'betriebsart',
@@ -83,11 +70,51 @@ async function initializeMap() {
     });
     clusters.addLayers(poiLayer.getLayers());
 
-    // poiLayer.addTo(map);
     clusters.addTo(map);
 
+    createFilterDropdown(data);
+
+}
+
+async function initializeDistrictLayer() {
+
+    const response = await fetch('data/stzh.adm_stadtkreise_a.json');
+    const data = await response.json();
+
+    districtLayer = L.geoJSON(data, {
+        style: () => {
+            return {
+                color: '#993399',
+                weight:  3,
+                fillOpacity: 0.1,
+            }
+        },
+        // onEachFeature: (feature, layer) => {
+        //     if (feature.properties?.['bezeichnung']) {
+        //         layer.bindTooltip(feature.properties['bezeichnung']);
+        //     }
+        // },
+    });
+
+    const bounds = districtLayer.getBounds();
+    map.fitBounds(bounds);
+
+    console.log(map);
+
+    districtLayer.addTo(map);
+
+}
+
+/**
+ * Initialize the webmap.
+ */
+async function initializeMap() {
+
+    await initializeDistrictLayer();
+    await initializeRestaurantLayer();
+    
     map.attributionControl.addAttribution(`
-        <a href="https://data.stadt-zuerich.ch/dataset/geo_gastwirtschaftsbetriebe" target="_blank">Stadt Zürich</a>
+        <a href="https://data.stadt-zuerich.ch=" target="_blank">Open Data Stadt Zürich</a>
     `);
 
 }

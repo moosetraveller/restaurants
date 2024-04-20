@@ -21,7 +21,7 @@ The webmap is using [Leaflet](https://leafletjs.com), [Leaflet.DonutCluster](htt
 ## Data
 | | |
 |----|---|
-| Source | [Stadt Zürich](https://data.stadt-zuerich.ch/dataset/geo_gastwirtschaftsbetriebe) |
+| Source | [Stadt Zürich](https://data.stadt-zuerich.ch) |
 | License | [Creative Commons CCZero](http://opendefinition.org/licenses/cc-zero/) |
 
-A copy of the data (April 18, 2024) can be found here [`data/stp.gastwirtschaftsbetriebe.json`](/data/stp.gastwirtschaftsbetriebe.json).
+A copy of the data can be found here [`data/stp.gastwirtschaftsbetriebe.json`](/data/stp.gastwirtschaftsbetriebe.json) (as of April 18, 2024) and [`data/stzh.adm_stadtkreise_a.json`](/data/stzh.adm_stadtkreise_a.json) (as of April 20, 2024).
